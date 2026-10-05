@@ -15,12 +15,12 @@ filename: wei-he-jie\r
 linked_title: 为何接\r
 category: 诗歌\r
 images:\r
-  - /images/pic7.jpg\r
-  - /images/pic8.jpg\r
-  - /images/pic9.jpg\r
-  - /images/pic10.jpg\r
-  - /images/pic11.jpg\r
-  - /images/pic12.jpg\r
+  - /CYX-sparks/images/pic7.jpg\r
+  - /CYX-sparks/images/pic8.jpg\r
+  - /CYX-sparks/images/pic9.jpg\r
+  - /CYX-sparks/images/pic10.jpg\r
+  - /CYX-sparks/images/pic11.jpg\r
+  - /CYX-sparks/images/pic12.jpg\r
 description: |\r
   续昨日的《为何要跪》，今天写《为何接》。灵感来自身边一些人。就是那种把生命的希望寄托到了一个人身上，那个最后的火苗或者说心苗双手奉上，祈求前面的人为他接住。有些没得到希望的答案的，有了场悲剧的发生。我思考自己的设身处地我会怎么样\r
 \r
@@ -86,12 +86,12 @@ filename: wei-he-yao-gui\r
 linked_title: 为何要跪\r
 category: 诗歌\r
 images:\r
-  - /images/pic1.jpg\r
-  - /images/pic2.jpg\r
-  - /images/pic3.jpg\r
-  - /images/pic4.jpg\r
-  - /images/pic5.jpg\r
-  - /images/pic6.jpg\r
+  - /CYX-sparks/images/pic1.jpg\r
+  - /CYX-sparks/images/pic2.jpg\r
+  - /CYX-sparks/images/pic3.jpg\r
+  - /CYX-sparks/images/pic4.jpg\r
+  - /CYX-sparks/images/pic5.jpg\r
+  - /CYX-sparks/images/pic6.jpg\r
 description: |\r
     这是一个关于"跪"的作品。\r
 \r
