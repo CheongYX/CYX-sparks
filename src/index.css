@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 页面平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 页面切换时的渐显动画 */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 针对 Markdown 正文的中文排版优化 */
+.prose-sparks p {
+  margin-bottom: 40px;        /* 彻底拉开段落之间的距离，增加留白 */
+  letter-spacing: 0.06em;      /* 微微拉开每一个汉字之间的距离，减少拥挤感 */
+  text-align: justify;         /* 让文字两端对齐，右侧边缘不会参差不齐 */
+  text-justify: inter-ideograph; /* 专门针对中文的两端对齐优化 */
+}
+
+/* =========================================
+   背景主题样式 (配合 App.jsx 中的切换器使用)
+   ========================================= */
+
+/* 方案 A：手账波点 */
+.bg-journal-dots {
+  background-image: radial-gradient(#d1d5db 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* 方案 B：信笺横纹 */
+.bg-paper-lines {
+  background-image: linear-gradient(transparent 95%, #e5e7eb 5%);
+  background-size: 100% 40px;
+}
+
+/* 方案 C：左侧红线 */
+.bg-margin-line {
+  position: relative;
+}
+
+.bg-margin-line::before {
+  content: '';
+  position: absolute;
+  left: 5%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: rgba(239, 68, 68, 0.3); /* 稍微加深的红色装订线 */
+  z-index: 0;
+  pointer-events: none; /* 确保这条线不会阻挡鼠标点击事件 */
+}
