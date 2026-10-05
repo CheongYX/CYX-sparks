@@ -6,10 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "node -e \"const fs=require('fs'); fs.copyFileSync('dist/index.html', 'dist/404.html');\" && gh-pages -d dist"
+    "lint": "oxlint",
+    "preview": "vite preview"
   },
   "dependencies": {
     "front-matter": "^4.0.2",
