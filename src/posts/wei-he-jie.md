@@ -5,12 +5,12 @@ filename: wei-he-jie
 linked_title: 为何接
 category: 诗歌
 images:
-  - /images/pic7.jpg
-  - /images/pic8.jpg
-  - /images/pic9.jpg
-  - /images/pic10.jpg
-  - /images/pic11.jpg
-  - /images/pic12.jpg
+  - /CYX-sparks/images/pic7.jpg
+  - /CYX-sparks/images/pic8.jpg
+  - /CYX-sparks/images/pic9.jpg
+  - /CYX-sparks/images/pic10.jpg
+  - /CYX-sparks/images/pic11.jpg
+  - /CYX-sparks/images/pic12.jpg
 description: |
   续昨日的《为何要跪》，今天写《为何接》。灵感来自身边一些人。就是那种把生命的希望寄托到了一个人身上，那个最后的火苗或者说心苗双手奉上，祈求前面的人为他接住。有些没得到希望的答案的，有了场悲剧的发生。我思考自己的设身处地我会怎么样
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
 import TimelineItem from './components/TimelineItem';
 import { sparks } from './data/sparksData';
+import { createPortal } from 'react-dom';
 
-// --- 页面 1：主页（系列列表） ---
 function SeriesList() {
   const validSparks = sparks.filter(s => s && s.frontmatter && s.frontmatter.series);
   const seriesNames = [...new Set(validSparks.map(s => s.frontmatter.series))];
@@ -27,7 +27,6 @@ function SeriesList() {
   );
 }
 
-// --- 页面 2：系列详情页（时间线） ---
 function SeriesTimeline() {
   const { seriesName } = useParams();
   const decodedSeriesName = decodeURIComponent(seriesName);
@@ -46,19 +45,39 @@ function SeriesTimeline() {
   );
 }
 
-// --- 页面 3：文章正文页 ---
 function ArticleDetail() {
   const { filename } = useParams();
   const navigate = useNavigate();
   const article = sparks.find(s => s.frontmatter?.filename === filename);
 
+  const [previewImage, setPreviewImage] = useState(null);
+
+  const handleContentClick = (e) => {
+    if (e.target.tagName === 'IMG') {
+      setPreviewImage(e.target.src);
+    }
+  };
+  
+  useEffect(() => {
+    if (article && article.frontmatter.linked_title) {
+      // 修复了这里的语法错误
+      document.title = `${article.frontmatter.linked_title} - CYX-随笔集`;
+    }
+    return () => {
+      document.title = 'CYX-随笔集';
+    };
+  }, [article]);
+
   if (!article) return <div className="text-center mt-20 text-gray-500">文章未找到。</div>;
 
   return (
     <div className="animate-fade-in pb-20">
-      <button onClick={() => navigate(-1)} className="bg-transparent border-none cursor-pointer text-sm text-gray-400 hover:text-gray-800 mb-8 p-0">
+      <Link 
+        to={`/series/${encodeURIComponent(article.frontmatter.series)}`} 
+        className="inline-block text-sm text-gray-400 hover:text-gray-800 mb-8 p-0 no-underline"
+      >
         ← 返回时间线
-      </button>
+      </Link>
       
       <h1 className="text-3xl font-serif text-gray-900 mb-4 tracking-wide">
         {article.frontmatter.linked_title}
@@ -69,14 +88,40 @@ function ArticleDetail() {
       </div>
       
       <div 
-        className="prose-sparks text-[#4a4a4a] leading-[40px] text-[17px] font-wenkai mt-[12px]" 
+        className="prose-sparks text-[#4a4a4a] leading-[40px] text-[17px] font-wenkai [&_img]:cursor-zoom-in"
+        style={{ marginTop: '26px' }}
+        onClick={handleContentClick}
         dangerouslySetInnerHTML={{ __html: article.content }} 
       />
+
+      {/* 🌟 核心修改：使用 createPortal 把弹窗传送到网页最顶层的 body 上 */}
+      {previewImage && createPortal(
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 cursor-zoom-out p-4 md:p-10"
+          onClick={() => setPreviewImage(null)}
+        >
+          <button 
+            className="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white text-3xl font-light bg-transparent border-none cursor-pointer p-2 z-[10000]"
+            onClick={(e) => {
+              e.stopPropagation();
+              setPreviewImage(null);
+            }}
+          >
+            ✕
+          </button>
+          <img 
+            src={previewImage} 
+            alt="Enlarged preview" 
+            className="max-w-full max-h-[90vh] object-contain rounded-md shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>,
+        document.body // 这里指定了挂载位置
+      )}
     </div>
   );
 }
 
-// --- 根组件（单按钮循环主题） ---
 export default function App() {
   const [bgStyle, setBgStyle] = useState(() => {
     return localStorage.getItem('cyx-sparks-bg') || 'blank';
@@ -93,7 +138,6 @@ export default function App() {
     margin: 'bg-margin-line'
   };
 
-  // 定义切换顺序和按钮上显示的文字
   const themes = [
     { id: 'blank', label: '纸张：空白' },
     { id: 'dots', label: '纸张：波点' },
@@ -101,21 +145,18 @@ export default function App() {
     { id: 'margin', label: '纸张：红线' }
   ];
 
-  // 点击按钮时的循环切换逻辑
   const handleThemeCycle = () => {
     const currentIndex = themes.findIndex(t => t.id === bgStyle);
     const nextIndex = (currentIndex + 1) % themes.length;
     setBgStyle(themes[nextIndex].id);
   };
 
-  // 找到当前选中主题的文字
   const currentThemeLabel = themes.find(t => t.id === bgStyle)?.label;
 
   return (
-    <BrowserRouter basename="/CYX-sparks">
+    <HashRouter>
       <div className={`min-h-screen bg-[#FAFAFA] transition-colors duration-500 py-20 px-6 ${bgClasses[bgStyle]}`}>
         
-        {/* 🌟 右上角的单按钮切换器 */}
         <div className="fixed top-6 right-6 md:top-10 md:right-10 z-50">
           <button
             onClick={handleThemeCycle}
@@ -140,6 +181,6 @@ export default function App() {
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

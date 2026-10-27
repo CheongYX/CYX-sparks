@@ -5,12 +5,12 @@ filename: wei-he-yao-gui
 linked_title: 为何要跪
 category: 诗歌
 images:
-  - /images/pic1.jpg
-  - /images/pic2.jpg
-  - /images/pic3.jpg
-  - /images/pic4.jpg
-  - /images/pic5.jpg
-  - /images/pic6.jpg
+  - /CYX-sparks/images/pic1.jpg
+  - /CYX-sparks/images/pic2.jpg
+  - /CYX-sparks/images/pic3.jpg
+  - /CYX-sparks/images/pic4.jpg
+  - /CYX-sparks/images/pic5.jpg
+  - /CYX-sparks/images/pic6.jpg
 description: |
     这是一个关于"跪"的作品。
 

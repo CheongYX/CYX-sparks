@@ -59,3 +59,15 @@ html {
   z-index: 0;
   pointer-events: none; /* 确保这条线不会阻挡鼠标点击事件 */
 }
+
+
+/* --- 针对文章内部图片的自适应控制 --- */
+.prose-sparks img {
+  max-width: 100%;       /* 手机竖屏逻辑：宽度绝对不能超过当前文字容器的宽度 */
+  max-height: 75vh;      /* 电脑横屏逻辑：高度绝对不能超过当前浏览器屏幕可视高度的 75% */
+  object-fit: contain;   /* 强制等比例缩放，绝不拉伸或裁剪图片 */
+  display: block;        /* 让图片独立成块 */
+  margin: 30px auto;     /* 图片上下留出 30px 呼吸空间，左右自动居中 */
+  border-radius: 8px;    /* （可选）给图片加个微微的圆角，更贴合随笔的精致感 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* （可选）加个极淡的阴影 */
+}
